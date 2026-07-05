@@ -25,7 +25,7 @@ function App() {
     };
 
     getCurrentUser();
-  }, []);
+  }, [dispatch]);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
