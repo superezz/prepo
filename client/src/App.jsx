@@ -17,7 +17,7 @@ function App() {
         const result = await axios.get(ServerURL + "/api/user/current-user", {
           withCredentials: true,
         });
-        dispatch(setUserInfo(result.data));
+        dispatch(setUserInfo(result.data.user));
       } catch (error) {
         console.error("Error fetching current user:", error);
         dispatch(setUserInfo(null)); // Clear user info on error

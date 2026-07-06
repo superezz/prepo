@@ -8,9 +8,18 @@ import { signInWithPopup } from "firebase/auth";
 import { ServerURL } from "../App";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { setUserInfo } from "../redux/userSlice.js";
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
 
-const Auth = () => {
+const Auth = ({isModel = false}) => {
   const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.user);
+
+  if (userInfo) {
+    return <Navigate to="/" replace />;
+  }
 
   const handleGoogleSignIn = async () => {
     try {
@@ -18,23 +27,31 @@ const Auth = () => {
       let User = response.user;
       let name = User.displayName;
       let email = User.email;
-      let userData = { name, email };
-      const res = await axios.post(ServerURL + "/api/auth/google", userData, {
+      let userInfo = { name, email };
+      const res = await axios.post(ServerURL + "/api/auth/google", userInfo, {
         withCredentials: true,
       });
-      dispatch(setUserInfo(res.data));
+      dispatch(setUserInfo(res.data.user));
     } catch (error) {
       console.error("Google sign-in failed:", error);
       dispatch(setUserInfo(null)); // Clear user info on error
     }
   };
   return (
-    <div className="w-full min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20">
+    <div
+      className={`w-full ${
+        isModel
+          ? "py-4"
+          : "min-h-screen bg-[#f3f3f3] flex items-center justify-center px-6 py-20"
+      }`}
+    >
       <motion.div
         initial={{ opacity: 0, y: -40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.05 }}
-        className="w-full max-w-md p-8 rounded-3xl bg-white shadow-2xl border border-gray-200"
+        className={`w-full ${
+          isModel ? "max-w-md p-8 rounded-3xl" : "max-w-lg p-12 rounded-[32px]"
+        } bg-white shadow-2xl border border-gray-200`}
       >
         <div className="flex items-center justify-center gap-3 mb-6">
           <div className="bg-black text-white p-2 rounded-lg">
