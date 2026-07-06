@@ -128,34 +128,7 @@ function Navbar() {
       {showAuth && <AuthModel onClose={() => setShowAuth(false)} />}
     </div>
 
-    // <div className="bg-[#f3f3f3] flex justify-center px-4 pt-6">
-    //   <motion.div className="w-full max-w-6xl bg-white rounded-[24px] shadow-sm border border-gray-200 px-8 py-4 flex items-center justify-between">
-    //     {/* Left */}
-    //     <div className="flex items-center gap-3">
-    //       <div className="bg-black text-white p-2 rounded-lg">
-    //         <BsRobot size={18} />
-    //       </div>
-
-    //       <h1 className="font-semibold text-lg">prepo.me</h1>
-    //     </div>
-
-    //     {/* Right */}
-    //     <div className="flex items-center gap-4">
-    //       <button className="flex items-center gap-2 bg-gray-100 px-4 py-2 rounded-full">
-    //         <BsCoin />
-    //         {userInfo?.credits}
-    //       </button>
-
-    //       <button className="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center">
-    //         {userInfo ? (
-    //           userInfo.name.charAt(0).toUpperCase()
-    //         ) : (
-    //           <FaUserAstronaut />
-    //         )}
-    //       </button>
-    //     </div>
-    //   </motion.div>
-    // </div>
+ 
   );
 }
 
